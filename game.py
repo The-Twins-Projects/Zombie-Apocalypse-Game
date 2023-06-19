@@ -35,11 +35,11 @@ def DeadBodiesRoom():
         elif userInput == "turn around":
             setUpTheStory()
         elif userInput == "go right":
-            print("You cautiously move closer to inspect the bodies littering the ground. Something catches your eye, buried underneath all the limbs, and you reach down to pull out a wooden baseball bat from the jumple of corpses. You have obtained a weapon! Now will you move ahead or turn around?")
+            print("You cautiously move closer to inspect the bodies littering the ground. Something catches your eye, buried underneath all the limbs, and you reach down to pull out a wooden baseball bat from the jumble of corpses. You have obtained a weapon! Now will you move ahead or turn around?")
             weapon = True
             secondActions = ["move ahead", "turn around"]     #continue on with the game by asking again to choose
             userSecondInput = ""
-            while userSecondInput not in actions:
+            while userSecondInput not in secondActions:
                 print("Choose: move ahead or turn around")
                 userSecondInput = input()
                 if userSecondInput == "move ahead":
@@ -62,14 +62,99 @@ def manyZombieNoises():
         if userInput == "cover ears":
             print("Unable to take the noise any longer, you cover your ears and close your eyes, perhaps unable to take the stress of the situation anymore, perhaps not wanting to see the cruel and gruesome ending you are about to meet. However, no matter how long you wait in the silence of your own fear, nothing happens. Opening your eyes in confusion, you realize you are back in your room as though nothing ever happened. Was it all a dream? Everything? Anyways, COngratulations! YOu have successfully escaped the zombie-infested school.")
             quit()
-        if userInput == "hide":
+        elif userInput == "hide":
             print("With nowhere to continue forwards, and the sounds of zombies growing closer, you duck under a table and hold your breath, praying the tablecloth draped to the floor is enough to cover and keep you hidden. Unfortunately, zombies seem to be able to sense fear, as their arms reach under the table and drag you out into your demise.")
             quit()    #the player has lost, the game has ended
-        if userInput == "turn around":
+        elif userInput == "turn around":
             setUpTheStory()
         else:
             print("Please enter one of the given choices.")
 
-#Creating a new scenario with a journal
-def foundJournal():
+#Creating a new scenario with a blood trail
+def foundBloodTrail():
     actions = ["left", "right"]
+    print("Carefully continuing on your trek through the school, you come across a T-intersection, with the hallway only splitting off to the left or to the right, unable to move forwards. A glimpse of red at the bottom of your vision pulls your focus down, and you notice a trail of blood on the floor that disappears down the flickering lights of the right path. Will you follow the blood trail to the right, or play it safe and go left?")
+    userInput = ""
+    while userInput not in actions:
+        print("Choose: right or left")     #input must be one of these keywords
+        userInput = input()
+        if userInput == "right":
+            humanEncounter()
+        elif userInput == "left":
+            print("Not taking a chance with the sinister aura that almost oozed from the right, you break into a sprint towards the left fork, almost crying in relief when you see a big sign above double doors that reads 'exit.' Congratulations! YOu have successfully escaped the zombie-infested school.")
+            quit()
+        else:
+            print("Please enter one of the given choices.")
+
+#Creating a new scenario with a mysterious human
+def humanEncounter():
+    actions = ["fight", "run away", "call out"]
+    print("The lights suddenly flicker overhead, casting a faint silhouette of a hunched figure. You take a step back, unsure if the person in front of you has picked up on your presence. Are they friend...or foe? You can either decide to fight, call out, or run away. What will you do?")
+    userInput = ""
+    while userInput not in actions:
+        print("Choose: fight, call out, or run away")     #input must be one of these keywords
+        userInput = input()
+        if userInput == "fight":
+            print("Mustering up what courage you possess, you charge forwards, footsteps heavy against the silence between you two. However, the lights shut off for just a second, shrouding your surroundings in total darkness. When they come back, off for not more than a second, the man in the hallway is nowhere to be seen. Confused, you halt in your steps, now unsure if there was anyone else in here with you or if you were just seeing things.")
+            foundBloodTrail()
+        elif userInput == "run away":
+            setUpTheStory()
+        elif userInput == "call out":
+            print("Deciding perhaps this man can offer help you call out to him, hoping the two of you can join forces to escape this school together. However, the mans profile does not so much as twitch in response. Looks like he doesn't want to speak...or can't. What will you do now?")
+            secondActions = ["fight", "run away"]
+            userSecondInput = ""
+            while userSecondInput not in secondActions:
+                print("Choose: fight or run away")
+                userSecondInput = input()
+                if userSecondInput == "fight":
+                    print("Mustering up what courage you possess, you charge forwards, footsteps heavy against the silence between you two. However, the lights shut off for just a second, shrouding your surroundings in total darkness. When they come back, off for not more than a second, the man in the hallway is nowhere to be seen. Confused, you halt in your steps, now unsure if there was anyone else in here with you or if you were just seeing things.")
+                    foundBloodTrail()
+                elif userSecondInput == "run away":
+                    setUpTheStory()
+                else:
+                    print("Please enter one of the given choices.")
+        else:
+            print("Please enter one of the given choices.")
+
+def setUpTheStory():
+    actions = ["north", "south", "east", "west"]
+    print("You stand in front of a faded map of the school, trying to decide the fastest route to exit this place. The only company you have are the sounds of the snarling zombies pounding on the door you hastily barricaded. The direction of infested zombies you barely escaped from seems to be the north wing of the school, and from there splits off into an east wing, south wing, and west wing. What route will you choose to continue onwards?")
+    userInput = ""
+    while userInput not in actions:
+        print("Choose: north, east, south, or west")
+        userInput = input()
+        if userInput == "east":
+            DeadBodiesRoom()
+        elif userInput == "south":
+            humanEncounter()
+        elif userInput == "west":
+            manyZombieNoises()
+        elif userInput == "north":
+            print("Are you crazy? I just specifically stated that thats the direction you came from, infested with crazy zombies who want to eat you, and you want to go back? Do you have a death wish? No, I won't let you. Pick another direction.")
+            secondActions = ["south", "east", "west"]
+            userSecondInput = ""
+            while userSecondInput not in secondActions:
+                print("Choose: south, east, or west")
+                userSecondInput = input()
+                if userSecondInput == "east":
+                    DeadBodiesRoom()
+                elif userSecondInput == "south":
+                    humanEncounter()
+                elif userSecondInput == "west":
+                    manyZombieNoises()
+                else:
+                    print("Please enter one of the given choices.")
+        else:
+            print("Please enter one of the given choices.")
+
+if __name__ == "__main__":
+    while True:
+        print("The year is 3044.")
+        print("A week ago a virus spread across the globe, turning those infected into hungry zombies who prey on others.")
+        print("You are one of the few survivors, scavenging through towns and cities in search of supplies and food to survive.")
+        print("However, one day you were quite unlucky, and became cornered in an abandoned school after being spotted and chased by a horde of zombies.")
+        print("You must now find your way through and out of the school, with every action you make resulting in dire consequences.")
+        print("Before we begin, what is your name?")
+        userName = input()
+        print("Be careful," +userName+ ", and choose your responses wisely.")
+        setUpTheStory()
